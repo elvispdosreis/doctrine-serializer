@@ -1,0 +1,12 @@
+{
+    "require": {
+        "doctrine/orm": "^2.6",
+        "jms/serializer": "^1.13",
+        "symfony/var-dumper": "4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "SON\\": "src/"
+        }
+    }
+}
