@@ -10,6 +10,21 @@ $serializer = JMS\Serializer\SerializerBuilder::create()->build();
 $group = \JMS\Serializer\SerializationContext::create()->setGroups(['details']);
 $group->setSerializeNull(true);
 
+
+/*
+$serializer2 = \JMS\Serializer\SerializerBuilder::create()
+    ->setObjectConstructor(
+        new \JMS\Serializer\Construction\DoctrineObjectConstructor(
+            $entityManager,
+            new \JMS\Serializer\Construction\UnserializeObjectConstructor(),
+            \JMS\Serializer\Construction\DoctrineObjectConstructor::ON_MISSING_FALLBACK
+        )
+    )
+    ->addDefaultHandlers()
+    ->build();
+*/
+
+
 // Detalhes da venda.
 $order = $entityManager->getRepository(\SON\Entity\Order::class)->find(1);
 

@@ -27,8 +27,35 @@ $config->setAutoGenerateProxyClasses(true);
 
 $entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
 
+
+
+$registry = new \SON\SimpleBaseManagerRegistry(
+    static function ($id) use ($entityManager) {
+        switch ($id) {
+            case 'default_connection':
+                return $entityManager->getConnection();
+            case 'default_manager':
+                return $entityManager;
+            default:
+                throw new \RuntimeException(sprintf('Unknown service id "%s".', $id));
+        }
+    }
+);
+
+$serializer = JMS\Serializer\SerializerBuilder::create()
+    ->setObjectConstructor(
+        new \JMS\Serializer\Construction\DoctrineObjectConstructor(
+            $registry,
+            new \JMS\Serializer\Construction\UnserializeObjectConstructor(),
+            \JMS\Serializer\Construction\DoctrineObjectConstructor::ON_MISSING_FALLBACK
+        )
+    )
+    ->addDefaultHandlers()
+    ->build();
+
+
 function getEntityManager()
 {
-    global $entityManager;
-    return $entityManager;
+    global $em;
+    return $em;
 }

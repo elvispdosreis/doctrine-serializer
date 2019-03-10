@@ -22,8 +22,9 @@ class Invoice
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="id_nfe", nullable=false, unique=true)
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", name="fk_venda", nullable=false, unique=true)
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @JMS\Type("int")
      */
     private $id;
 
@@ -67,6 +68,25 @@ class Invoice
      * @ORM\JoinColumn(name="fk_venda", referencedColumnName="id_venda", nullable=false, unique=true)
      */
     private $order;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Invoice
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
 
     /**
      * @return mixed
