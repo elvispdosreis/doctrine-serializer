@@ -14,7 +14,12 @@ $arr = new \Doctrine\Common\Collections\ArrayCollection($arr);
 $entity = $entityManager->getReference(\SON\Entity\Category::class, 1);
 $category = new \SON\Entity\Category();
 $category->setName('Informática');
-$category->setParent($entity);
+
+
+$children = new \SON\Entity\Category();
+$children->setName('Componentes para PC');
+$category->setParent($category);
 
 $entityManager->persist($category);
+$entityManager->persist($children);
 $entityManager->flush();
