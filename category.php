@@ -16,10 +16,10 @@ $category = new \SON\Entity\Category();
 $category->setName('Informática');
 
 
-$children = new \SON\Entity\Category();
-$children->setName('Componentes para PC');
-$category->setParent($category);
+//$children = new \SON\Entity\Category();
+//$children->setName('Componentes para PC');
+//$category->setParent($entity);
 
 $entityManager->persist($category);
-$entityManager->persist($children);
+//$entityManager->persist($children);
 $entityManager->flush();

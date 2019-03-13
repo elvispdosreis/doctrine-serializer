@@ -26,6 +26,31 @@ class Category
      */
     protected $name;
 
+    /**
+     * @ORM\Column(type="string", name="description", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="string", name="keywords", nullable=true)
+     */
+    protected $keywords;
+
+    /**
+     * @ORM\Column(type="integer", name="sequence", nullable=true)
+     */
+    protected $sequence;
+
+    /**
+     * @ORM\Column(type="string", name="external_id", length=20, nullable=true, unique=true)
+     */
+    protected $external_id;
+
+    /**
+     * @ORM\Column(type="boolean", name="active", nullable=true)
+     */
+    protected $active;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
@@ -38,9 +63,18 @@ class Category
      */
     private $parent;
 
+
+    // ...
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     * @ORM\JoinColumn(name="id", referencedColumnName="categorie_id")
+     */
+    private $products;
+
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -76,6 +110,96 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
+
+    /**
+     * @param mixed $keywords
+     * @return Category
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param mixed $order
+     * @return Category
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalId()
+    {
+        return $this->external_id;
+    }
+
+    /**
+     * @param mixed $external_id
+     * @return Category
+     */
+    public function setExternalId($external_id)
+    {
+        $this->external_id = $external_id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     * @return Category
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
         return $this;
     }
 
