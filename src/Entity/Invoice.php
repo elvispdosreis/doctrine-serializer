@@ -22,7 +22,7 @@ class Invoice
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="fk_venda", nullable=false, unique=true)
+     * @ORM\Column(type="integer", name="fk_venda", nullable=false)
      * @ORM\GeneratedValue(strategy="NONE")
      * @JMS\Type("int")
      */

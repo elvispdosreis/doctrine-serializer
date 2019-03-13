@@ -25,17 +25,17 @@ $config->setProxyDir(__DIR__ . '/../proxy');
 $config->setProxyNamespace('SON\Proxies');
 $config->setAutoGenerateProxyClasses(true);
 
-$entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
+$em = \Doctrine\ORM\EntityManager::create($dbParams, $config);
 
 
 
 $registry = new \SON\SimpleBaseManagerRegistry(
-    static function ($id) use ($entityManager) {
+    static function ($id) use ($em) {
         switch ($id) {
             case 'default_connection':
-                return $entityManager->getConnection();
+                return $em->getConnection();
             case 'default_manager':
-                return $entityManager;
+                return $em;
             default:
                 throw new \RuntimeException(sprintf('Unknown service id "%s".', $id));
         }
