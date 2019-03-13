@@ -10,13 +10,15 @@ namespace SON\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**  @ORM\Entity */
+/**
+ * @ORM\Entity(repositoryClass="CategoryRepository")
+ * @ORM\Table(name="categorias")
+ */
 class Category
 {
-
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="id", nullable=false, unique=true)
+     * @ORM\Column(type="integer", name="id_categoria", nullable=false, unique=true)
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -59,12 +61,11 @@ class Category
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")¶
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id_categoria")
      */
     private $parent;
 
 
-    // ...
     /**
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
      */

@@ -11,22 +11,24 @@ namespace SON\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Entity(repositoryClass="ProductRepository")
  * @ORM\Table(name="produtos")
  */
 class Product
 {
+
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="id_produto", nullable=false, unique=true)
+     * @ORM\Column(type="integer", name="id_produto", nullable=false)
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinTable(name="departaments",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id_produto")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="categorie_id", referencedColumnName="id")}
+     * @ORM\JoinTable(name="departamentos",
+     *      joinColumns={@ORM\JoinColumn(name="fk_produto", referencedColumnName="id_produto")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="fk_categoria", referencedColumnName="id_categoria")}
      *      )
      */
     private $categories;
