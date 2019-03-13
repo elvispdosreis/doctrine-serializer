@@ -67,7 +67,6 @@ class Category
     // ...
     /**
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
-     * @ORM\JoinColumn(name="id", referencedColumnName="categorie_id")
      */
     private $products;
 

@@ -11,7 +11,7 @@ namespace SON\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Table(name="produtos")
  */
 class Product
 {
@@ -24,8 +24,10 @@ class Product
 
     /**
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
-     * @@ORM\JoinTable(name="departaments")
-     * @ORM\JoinColumn(name="id_produto", referencedColumnName="product_id")
+     * @ORM\JoinTable(name="departaments",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id_produto")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="categorie_id", referencedColumnName="id")}
+     *      )
      */
     private $categories;
 
