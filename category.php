@@ -9,18 +9,19 @@ $entityManager = getEntityManager();
 
 
 $entity = $entityManager->getReference(\SON\Entity\Category::class, 1);
-
+//https://wiki.php.net/rfc/iterable
 $category = new \SON\Entity\Category();
-$category->setName('Componentes para PC');
+$children->setName('Informática');
 $category->setParent($entity);
 
 $arr = explode('>', 'Informática > Componentes para PC > Fontes de Alimentação > ATX > 500W a 590W');
 foreach ($arr as $key => $value) {
-    // $category = new \SON\Entity\Category();
-    // $category->setName(trim($value));
-    // $category->setChildren($category);
+     $parent = $entityManager->getRepository(\SON\Entity\Category::class)->findOneBy(['name' => trim($value)]);
+     $children = new \SON\Entity\Category();
+     $children->setName(trim($value));
+     $entity->setChildren($children);
 }
 
-$entityManager->persist($category);
+$entityManager->persist($children);
 $entityManager->flush();
 
